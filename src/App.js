@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LikeContent from './LikeContent';
 
 /*
 Display a list of movies where each movie contains a list of users that favorited it.
@@ -106,6 +107,23 @@ class App extends Component {
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
         <h2>How Popular is Your Favorite Movie?</h2>
+      	{/*
+        	Take the movies object and for each movie select the occurences in 
+            the profiles array
+        */}
+      	{Object.keys(movies).map((key) => {
+      		/*
+            	with the movie key try to select the profiles that 
+                match this id
+            */
+			const profilesLike = profiles.filter((profile) => {
+            	return key === profile.favoriteMovieID;
+            })
+            /*
+            then return the inner content with the LikeContent passing the key, the profiles with the movie, the users and the movie name
+            */
+            return <LikeContent key={key} profilesLike={profilesLike} users={users} movieName={movies[key].name} />
+    	})}
       </div>
     );
   }
